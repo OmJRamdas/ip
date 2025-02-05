@@ -37,13 +37,24 @@ public class Clanker {
 
         private boolean handleCommand(String userCommand, Tasks tasks) {
             System.out.println(LINE);
-            if (userCommand.equals("bye")) {
+
+            String[] parts = userCommand.split(" ");
+            String firstWord = parts[0];
+
+            if (firstWord.equals("bye")) {
                 return false;
-            } else if (userCommand.equals("list")) {
+            } else if (firstWord.equals("list")) {
                 tasks.getTasks();
+            } else if (firstWord.equals("mark")) {
+                int mark = Integer.parseInt(parts[1]);
+                tasks.markTask(mark - 1);
+            } else if (firstWord.equals("unmark")) {
+                int mark = Integer.parseInt(parts[1]);
+                tasks.unmarkTask(mark - 1);
             } else {
                 tasks.addTask(userCommand);
             }
+
             System.out.println(LINE);
             return true;
         }
