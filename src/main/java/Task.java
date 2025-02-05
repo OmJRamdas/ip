@@ -7,8 +7,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getTask() {
-        return (this.isDone) ? "[X] " + name : "[ ] " + name;
+    public String getStatus() {
+        return (this.isDone) ? "X" : " ";
+    }
+
+    public String toString() {
+        return String.format("[%s] %s", getStatus(), this.name);
     }
 
     public void markAsDone() {

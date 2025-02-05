@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Clanker {
-
         private static final String LINE = "____________________________________________________________";
         private static final String LOGO = " _____ _             _\n"
                 + "/  __ \\ |           | |\n"
@@ -13,12 +12,12 @@ public class Clanker {
 
         private void greet() {
             System.out.println(LINE);
-            System.out.println("Hello I'm\n" + LOGO + "\n"+ "What Can I do for you?");
+            System.out.println(LOGO + "\n"+ "ROGER ROGER what Can I do for you?");
             System.out.println(LINE);
         }
 
         private void goodbye() {
-            System.out.println("Bye! Hope to see you again soon!");
+            System.out.println("ROGER ROGER! Hope to see you soon");
             System.out.println(LINE);
         }
 
@@ -27,45 +26,15 @@ public class Clanker {
             return scanner.nextLine();
         }
 
-        /* Depreciated for Level-2
-        private void echoUserCommand(String command) {
-            System.out.println(LINE);
-            System.out.println(command);
-            System.out.println(LINE);
-        }
-         */
-
-        private boolean handleCommand(String userCommand, Tasks tasks) {
-            System.out.println(LINE);
-
-            String[] parts = userCommand.split(" ");
-            String firstWord = parts[0];
-
-            if (firstWord.equals("bye")) {
-                return false;
-            } else if (firstWord.equals("list")) {
-                tasks.getTasks();
-            } else if (firstWord.equals("mark")) {
-                int mark = Integer.parseInt(parts[1]);
-                tasks.markTask(mark - 1);
-            } else if (firstWord.equals("unmark")) {
-                int mark = Integer.parseInt(parts[1]);
-                tasks.unmarkTask(mark - 1);
-            } else {
-                tasks.addTask(userCommand);
-            }
-
-            System.out.println(LINE);
-            return true;
-        }
-
 
         private void chatLoop() {
             Tasks tasks = new Tasks();
             boolean isRunning= true;
             while (isRunning) {
                 String userCommand = getUserInput();
-                isRunning = handleCommand(userCommand, tasks);
+                System.out.println(LINE);
+                isRunning = tasks.handleCommand(userCommand);
+                System.out.println(LINE);
             }
         }
 
