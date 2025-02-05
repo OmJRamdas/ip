@@ -27,20 +27,34 @@ public class Clanker {
             return scanner.nextLine();
         }
 
+        /* Depreciated for Level-2
         private void echoUserCommand(String command) {
             System.out.println(LINE);
             System.out.println(command);
             System.out.println(LINE);
         }
+         */
+
+        private boolean handleCommand(String userCommand, Tasks tasks) {
+            System.out.println(LINE);
+            if (userCommand.equals("bye")) {
+                return false;
+            } else if (userCommand.equals("list")) {
+                tasks.getTasks();
+            } else {
+                tasks.addTask(userCommand);
+            }
+            System.out.println(LINE);
+            return true;
+        }
+
 
         private void chatLoop() {
+            Tasks tasks = new Tasks();
             boolean isRunning= true;
             while (isRunning) {
                 String userCommand = getUserInput();
-                if (userCommand.equals("bye")) {
-                    isRunning = false;
-                }
-                echoUserCommand(userCommand);
+                isRunning = handleCommand(userCommand, tasks);
             }
         }
 
