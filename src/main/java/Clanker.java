@@ -29,7 +29,7 @@ public class Clanker {
 
         private void chatLoop() {
             Tasks tasks = new Tasks();
-            boolean isRunning= true;
+            boolean isRunning = true;
             while (isRunning) {
                 String userCommand = getUserInput();
                 System.out.println(LINE);
