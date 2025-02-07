@@ -1,3 +1,4 @@
+REM In windows go to this dir and run .\runtest.bat
 @ECHO OFF
 
 REM create bin directory if it doesn't exist
