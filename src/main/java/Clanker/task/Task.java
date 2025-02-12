@@ -1,3 +1,5 @@
+package Clanker.task;
+
 public class Task {
     protected String name;
     protected boolean isDone;
