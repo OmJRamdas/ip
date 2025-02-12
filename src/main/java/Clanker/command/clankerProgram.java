@@ -1,8 +1,11 @@
 package Clanker.command;
 
+
+
 import java.util.*;
 import Clanker.parser.*;
 import Clanker.task.*;
+import Clanker.exceptions.*;
 
 
 public class clankerProgram {
@@ -18,7 +21,13 @@ public class clankerProgram {
         do {
             userCommand = userInputParser.getUserInput();
             userCommandParts = userCommand.split(" ");
-            handleCommand(userCommandParts, tasks, userCommand);
+
+            try {
+                handleCommand(userCommandParts, tasks, userCommand);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
             System.out.println(LINE);
         } while (!userCommandParts[0].equals("BLAST-EM"));
     }
@@ -33,8 +42,8 @@ public class clankerProgram {
     private static void handleCommand(String[] parts, Tasks tasks, String userCommand) {
         String remainingWords = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
 
-        try {
-            switch (parts[0]) {
+
+        switch (parts[0]) {
             case "BLAST-EM":
                 break;
             case "mark":
@@ -56,11 +65,7 @@ public class clankerProgram {
                 tasks.addEvent(remainingWords);
                 break;
             default:
-                System.out.println("Unknown command: " + userCommand);
-                break;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+                throw new InvalidCommandException(userCommand);
         }
     }
 }

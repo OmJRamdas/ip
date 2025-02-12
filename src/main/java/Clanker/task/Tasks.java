@@ -1,5 +1,7 @@
 package Clanker.task;
 
+import Clanker.exceptions.*;
+
 public class Tasks {
     private Task[] tasks;
     private int index;
@@ -30,6 +32,9 @@ public class Tasks {
     }
 
     public void addTodo(String task) {
+        if (task.isBlank()) { // Check if the description is empty
+            throw new EmptyDescriptionException("todo");
+        }
         try {
             tasks[index] = new Todo(task);
             System.out.println("ROGER ROGER Adding the following Clanker.task.Todo: " + tasks[index].toString());
@@ -41,6 +46,10 @@ public class Tasks {
     }
 
     public void addDeadline(String task) {
+        if (task.isBlank()) { // Check if the description is empty
+            throw new EmptyDescriptionException("deadline");
+        }
+
         try {
             String[] parts = task.split("/by ", 2);
             tasks[index] = new Deadline(parts[0], parts[1]);
@@ -53,6 +62,10 @@ public class Tasks {
     }
 
     public void addEvent(String task) {
+        if (task.isBlank()) { // Check if the description is empty
+            throw new EmptyDescriptionException("event");
+        }
+
         try {
             String[] parts = task.split("/from | /to ", 3);
             tasks[index] = new Event(parts[0], parts[1], parts[2]);
