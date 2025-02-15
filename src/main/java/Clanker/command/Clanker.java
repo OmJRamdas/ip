@@ -1,7 +1,6 @@
 package Clanker.command;
 
 import Clanker.task.Tasks;
-
 import java.util.Scanner;
 
 public class Clanker {

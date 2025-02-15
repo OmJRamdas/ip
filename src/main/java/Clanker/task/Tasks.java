@@ -11,6 +11,10 @@ public class Tasks {
         index = 0;
     }
 
+    /**
+     *  Mark task as done
+     * @param number, task number
+     */
     public void markTask(int number) {
         try {
             this.tasks[number].markAsDone();
@@ -21,6 +25,10 @@ public class Tasks {
         }
     }
 
+    /**
+     *  Mark task as undone
+     * @param number, task number
+     */
      public void unmarkTask(int number) {
         try {
             this.tasks[number].markAsNotDone();
@@ -31,6 +39,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Add todo to Tasks
+     * @param task, Todo
+     */
     public void addTodo(String task) {
         if (task.isBlank()) { // Check if the description is empty
             throw new EmptyDescriptionException("todo");
@@ -45,6 +57,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Add deadline to Tasks
+     * @param task, Deadline
+     */
     public void addDeadline(String task) {
         if (task.isBlank()) { // Check if the description is empty
             throw new EmptyDescriptionException("deadline");
@@ -61,6 +77,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Add Event to tasks
+     * @param task
+     */
     public void addEvent(String task) {
         if (task.isBlank()) { // Check if the description is empty
             throw new EmptyDescriptionException("event");
@@ -77,6 +97,9 @@ public class Tasks {
         }
     }
 
+    /**
+     *  Get all tasks
+     */
     public void getTasks() {
         if (index == 0) {
             System.out.println("No tasks found");
@@ -87,5 +110,4 @@ public class Tasks {
             }
         }
     }
-
 }

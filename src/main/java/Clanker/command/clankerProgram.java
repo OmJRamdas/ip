@@ -42,7 +42,6 @@ public class clankerProgram {
     private static void handleCommand(String[] parts, Tasks tasks, String userCommand) {
         String remainingWords = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
 
-
         switch (parts[0]) {
             case "BLAST-EM":
                 break;
