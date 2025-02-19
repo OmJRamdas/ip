@@ -129,7 +129,9 @@ public class Tasks {
 
         try {
             Task task = tasks.get(number - 1);
-            System.out.println("ROGER ROGER! Deleting Task: " + task.toString());
+            System.out.println("ROGER ROGER! Deleting Task: " );
+            System.out.println(task.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
             tasks.remove(number - 1);
         } catch (Exception e) {
             System.out.println("Error in deleting task: " + number + ". Reason: " + e.getMessage());
