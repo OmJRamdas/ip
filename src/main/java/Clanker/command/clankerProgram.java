@@ -63,6 +63,9 @@ public class clankerProgram {
             case "event":
                 tasks.addEvent(remainingWords);
                 break;
+            case "delete":
+                tasks.deleteTask(Integer.parseInt(remainingWords));
+                break;
             default:
                 throw new InvalidCommandException(userCommand);
         }
