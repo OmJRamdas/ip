@@ -10,34 +10,33 @@ public class Clanker {
                 + " \\____/_|\\__,_|_| |_|_|\\_\\___|_|\n";
 
     /**
-     *  Greeting Function for Clanker.command.Clanker
+     *  Greeting Function for Clanker
      */
-    private void greet() {
+    private static void greet() {
             System.out.println(LINE);
             System.out.println(LOGO + "\n"+ "ROGER ROGER what Can I do for you?");
             System.out.println(LINE);
     }
 
     /**
-     *  Goodbye function for Clanker.command.Clanker
+     *  Goodbye function for Clanker
      */
-    private void goodbye() {
+    private static void goodbye() {
         System.out.println("ROGER ROGER! Hope to see you soon");
         System.out.println(LINE);
     }
 
 
     /**
-     *  Overall program for Clanker.command.Clanker
+     *  Overall program for Clanker
      */
-    public void chatBotProgram() {
+    private static void chatBotProgram() {
         greet();
         clankerProgram.run();
         goodbye();
     }
 
     public static void main(String[] args) {
-        Clanker chatbot = new Clanker();
-        chatbot.chatBotProgram();
+       chatBotProgram();
     }
 }
