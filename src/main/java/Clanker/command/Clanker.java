@@ -1,5 +1,7 @@
 package Clanker.command;
 
+import Clanker.command.clankerProgram;
+
 public class Clanker {
     private static final String LINE = "____________________________________________________________";
     private static final String LOGO = " _____ _             _\n"
