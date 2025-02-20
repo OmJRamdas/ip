@@ -1,14 +1,14 @@
 package Clanker.task;
 
+import java.util.ArrayList;
 import Clanker.exceptions.*;
 
+
 public class Tasks {
-    private Task[] tasks;
-    private int index;
+    private ArrayList<Task> tasks;
 
     public Tasks() {
-        tasks = new Task[100];
-        index = 0;
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -17,25 +17,27 @@ public class Tasks {
      */
     public void markTask(int number) {
         try {
-            this.tasks[number].markAsDone();
+            Task task = tasks.get(number - 1);
+            task.markAsDone();
             System.out.println("ROGER ROGER! This Clanker.command.Clanker.exceptions.task has been marked as done");
-            System.out.println(tasks[number].toString());
+            System.out.println(task.toString());
         } catch (Exception e) {
-            System.out.println("Error in marking Clanker.command.Clanker.exceptions.task: " + number);
+            System.out.println("Error in marking task: " + number + ". Reason: " + e.getMessage());
         }
     }
 
     /**
-     *  Mark task as undone
+     *  Mark ith task as undone
      * @param number, task number
      */
      public void unmarkTask(int number) {
         try {
-            this.tasks[number].markAsNotDone();
+            Task task = tasks.get(number - 1);
+            task.markAsNotDone();
             System.out.println("ROGER ROGER! This Clanker.command.Clanker.exceptions.task has been marked as not done");
-            System.out.println(tasks[number].toString());
+            System.out.println(task.toString());
         } catch (Exception e) {
-            System.out.println("Error in unmarking Clanker.command.Clanker.exceptions.task: " + number);
+            System.out.println("Error in marking task: " + number + ". Reason: " + e.getMessage());
         }
     }
 
@@ -48,10 +50,10 @@ public class Tasks {
             throw new EmptyDescriptionException("todo");
         }
         try {
-            tasks[index] = new Todo(task);
-            System.out.println("ROGER ROGER Adding the following Clanker.task.Todo: " + tasks[index].toString());
-            index++;
-            System.out.println("Now you have " + (index) + " tasks in the list");
+            Task newTask = new Todo(task);
+            tasks.add(newTask);
+            System.out.println("ROGER ROGER Adding the following Clanker.task.Todo: " + newTask.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
         } catch (Exception e) {
             System.out.println("Error adding " + task);
         }
@@ -68,10 +70,11 @@ public class Tasks {
 
         try {
             String[] parts = task.split("/by ", 2);
-            tasks[index] = new Deadline(parts[0], parts[1]);
-            System.out.println("ROGER ROGER Adding the following Clanker.command.Clanker.task.Deadline: " + tasks[index].toString());
-            index++;
-            System.out.println("Now you have " + (index) + " tasks in the list");
+            Task newTask = new Deadline(parts[0], parts[1]);
+            tasks.add(newTask);
+
+            System.out.println("ROGER ROGER Adding the following Clanker.command.Clanker.task.Deadline: " + newTask.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
         } catch (Exception e) {
             System.out.println("Error in adding event: " + task);
         }
@@ -88,10 +91,10 @@ public class Tasks {
 
         try {
             String[] parts = task.split("/from | /to ", 3);
-            tasks[index] = new Event(parts[0], parts[1], parts[2]);
-            System.out.println("ROGER ROGER Adding the following Clanker.task.Event: " + tasks[index].toString());
-            index++;
-            System.out.println("Now you have " + (index) + " tasks in the list");
+            Task newTask = new Event(parts[0], parts[1], parts[2]);
+            tasks.add(newTask);
+            System.out.println("ROGER ROGER Adding the following Clanker.task.Event: " + newTask.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
         } catch (Exception e) {
             System.out.println("Error in adding event: " + task);
         }
@@ -101,12 +104,12 @@ public class Tasks {
      *  Get all tasks
      */
     public void getTasks() {
-        if (index == 0) {
+        if (tasks.isEmpty()) {
             System.out.println("No tasks found");
         } else {
             System.out.println("ROGER ROGER Here are the tasks: ");
-            for (int i = 0; i < index; i++) {
-                System.out.println((i + 1) + ". " + tasks[i].toString());
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
         }
     }

@@ -38,7 +38,7 @@ public class clankerProgram {
             }
 
             System.out.println(LINE);
-        } while (!userCommandParts[0].equals("BLAST-EM"));
+        } while (!userCommandParts[0].equals("blast-em"));
     }
 
     /**
@@ -52,15 +52,15 @@ public class clankerProgram {
         String remainingWords = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
 
         switch (parts[0]) {
-            case "BLAST-EM":
+            case "blast-em":
                 break;
             case "mark":
-                tasks.markTask(Integer.parseInt(parts[1]) - 1);
+                tasks.markTask(Integer.parseInt(parts[1]));
                 break;
             case "unmark":
-                tasks.unmarkTask(Integer.parseInt(parts[1]) - 1);
+                tasks.unmarkTask(Integer.parseInt(parts[1]));
                 break;
-            case "list":
+            case "ls":
                 tasks.getTasks();
                 break;
             case "todo":
