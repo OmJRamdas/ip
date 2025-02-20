@@ -1,7 +1,5 @@
 package Clanker.command;
 
-
-
 import java.io.*;
 import java.util.*;
 import Clanker.parser.*;
@@ -19,10 +17,10 @@ public class clankerProgram {
         filemanager manager = new filemanager("data/clanker.txt");
         String userCommand;
         String[] userCommandParts;
-        ArrayList<Task> tasks;
-        try {
-            tasks = manager.loadTasks();
+        Tasks tasks;
 
+        try {
+            tasks = new Tasks(manager.loadTasks());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,6 +37,12 @@ public class clankerProgram {
 
             System.out.println(LINE);
         } while (!userCommandParts[0].equals("blast-em"));
+
+        try {
+            manager.saveTasks(tasks.getTasksList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

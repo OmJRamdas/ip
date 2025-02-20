@@ -11,6 +11,10 @@ public class Tasks {
         tasks = new ArrayList<>();
     }
 
+    public Tasks(ArrayList<Task> input) {
+        tasks = input;
+    }
+
     /**
      *  Mark task as done
      * @param number, task number
@@ -112,5 +116,9 @@ public class Tasks {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
         }
+    }
+
+    public ArrayList<Task> getTasksList() {
+        return tasks;
     }
 }

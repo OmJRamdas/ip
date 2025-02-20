@@ -92,10 +92,6 @@ public class filemanager {
      * @return A Task object.
      */
     private Task parseTaskFromFile(String line) {
-        // Example line formats:
-        // [T][ ] work
-        // [D][X] submit assignment (by: Monday)
-        // [E][ ] team meeting (from: 10am to: 12pm)
 
         char type = line.charAt(1); // T, D, E
         boolean isDone = line.charAt(4) == 'X'; // 'X' means done
