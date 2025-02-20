@@ -11,6 +11,10 @@ public class Tasks {
         tasks = new ArrayList<>();
     }
 
+    public Tasks(ArrayList<Task> input) {
+        tasks = input;
+    }
+
     /**
      *  Mark task as done
      * @param number, task number
@@ -136,5 +140,9 @@ public class Tasks {
         } catch (Exception e) {
             System.out.println("Error in deleting task: " + number + ". Reason: " + e.getMessage());
         }
+    }
+
+    public ArrayList<Task> getTasksList() {
+        return tasks;
     }
 }
