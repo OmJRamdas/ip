@@ -2,6 +2,7 @@ package Clanker.command;
 
 
 
+import java.io.*;
 import java.util.*;
 import Clanker.parser.*;
 import Clanker.task.*;
@@ -15,9 +16,17 @@ public class clankerProgram {
      *  Main run program for Clanker
      */
     public static void run() {
+        filemanager manager = new filemanager("data/clanker.txt");
         String userCommand;
         String[] userCommandParts;
-        Tasks tasks = new Tasks();
+        ArrayList<Task> tasks;
+        try {
+            tasks = manager.loadTasks();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         do {
             userCommand = userInputParser.getUserInput();
             userCommandParts = userCommand.split(" ");
