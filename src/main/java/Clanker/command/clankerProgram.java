@@ -9,6 +9,7 @@ import Clanker.Ui.Ui;
 
 
 public class clankerProgram {
+
     /**
      *  Main program
      */
@@ -48,7 +49,6 @@ public class clankerProgram {
      * @param inputParser, input object
      * @param tasks, tasks
      */
-
     private static void handleCommand(userInputParser inputParser, Tasks tasks) {
         String remainingWords = inputParser.getArguments();
         String[] parts = inputParser.getParsedInput();
