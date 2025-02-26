@@ -1,11 +1,13 @@
 package Clanker.task;
 
+import Clanker.parser.dateTimeParser;
+
 public class Deadline extends Task {
     protected String Deadline;
 
     public Deadline(String name, String deadline) {
         super(name);
-        this.Deadline = deadline;
+        this.Deadline = dateTimeParser.parseDateTime(deadline);
     }
 
     @Override
