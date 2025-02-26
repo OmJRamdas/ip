@@ -14,7 +14,7 @@ public class Ui {
      */
     public static void greet() {
         System.out.println(LINE);
-        System.out.println(LOGO + "\n"+ "ROGER ROGER what Can I do for you?");
+        System.out.println(LOGO + "\n"+ "ROGER ROGER What can I do for you?");
         System.out.println(LINE);
     }
 

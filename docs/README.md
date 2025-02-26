@@ -1,6 +1,4 @@
-# Clanker.command.Clanker User Guide
-
-// Update the title above to match the actual product name
+# Clanker User Guide
 
 // Product screenshot goes here
 
