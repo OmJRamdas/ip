@@ -1,6 +1,5 @@
 package Clanker.task;
 
-
 public class Event extends Task {
     protected String startTime;
     protected String endTime;

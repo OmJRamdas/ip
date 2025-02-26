@@ -7,10 +7,6 @@ import Clanker.exceptions.*;
 public class Tasks {
     private ArrayList<Task> tasks;
 
-    public Tasks() {
-        tasks = new ArrayList<>();
-    }
-
     public Tasks(ArrayList<Task> input) {
         tasks = input;
     }
@@ -135,10 +131,10 @@ public class Tasks {
             Task task = tasks.get(number - 1);
             System.out.println("ROGER ROGER! Deleting Task: " );
             System.out.println(task.toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list");
             tasks.remove(number - 1);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list");
         } catch (Exception e) {
-            System.out.println("Error in deleting task: " + number + ". Reason: " + e.getMessage());
+            System.out.println("Error in deleting task: " + (number));
         }
     }
 

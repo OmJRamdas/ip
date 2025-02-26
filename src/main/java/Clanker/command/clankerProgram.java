@@ -1,23 +1,21 @@
 package Clanker.command;
 
 import java.io.*;
-import java.util.*;
-import Clanker.parser.*;
+import Clanker.parser.userInputParser;
+import Clanker.storage.filemanager;
 import Clanker.task.*;
 import Clanker.exceptions.*;
+import Clanker.Ui.Ui;
 
 
 public class clankerProgram {
-    private static final String LINE = "____________________________________________________________";
-
     /**
-     *  Main run program for Clanker
+     *  Main program
      */
     public static void run() {
         filemanager manager = new filemanager("data/clanker.txt");
-        String userCommand;
-        String[] userCommandParts;
         Tasks tasks;
+        userInputParser inputParser = new userInputParser();
 
         try {
             tasks = new Tasks(manager.loadTasks());
@@ -26,36 +24,36 @@ public class clankerProgram {
         }
 
         do {
-            userCommand = userInputParser.getUserInput();
-            userCommandParts = userCommand.split(" ");
+            inputParser.readUserInput();
 
             try {
-                handleCommand(userCommandParts, tasks, userCommand);
+                handleCommand(inputParser, tasks);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
-
-            System.out.println(LINE);
-        } while (!userCommandParts[0].equals("blast-em"));
+            Ui.printLine();
+        } while (!inputParser.getCommand().equals("blast-em"));
 
         try {
             manager.saveTasks(tasks.getTasksList());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        userInputParser.closeScanner();
     }
 
     /**
      * Handles command
-     * @param parts, breakdown of input
+     * @param inputParser, input object
      * @param tasks, tasks
-     * @param userCommand, the original input string (for error messages)
      */
 
-    private static void handleCommand(String[] parts, Tasks tasks, String userCommand) {
-        String remainingWords = String.join(" ", Arrays.copyOfRange(parts, 1, parts.length));
+    private static void handleCommand(userInputParser inputParser, Tasks tasks) {
+        String remainingWords = inputParser.getArguments();
+        String[] parts = inputParser.getParsedInput();
 
-        switch (parts[0]) {
+        switch (inputParser.getCommand()) {
             case "blast-em":
                 break;
             case "mark":
@@ -80,7 +78,7 @@ public class clankerProgram {
                 tasks.deleteTask(Integer.parseInt(remainingWords));
                 break;
             default:
-                throw new InvalidCommandException(userCommand);
+                throw new InvalidCommandException(inputParser.getUserInput());
         }
     }
 }

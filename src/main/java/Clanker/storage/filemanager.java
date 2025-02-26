@@ -1,4 +1,4 @@
-package Clanker.command;
+package Clanker.storage;
 
 import Clanker.task.*;
 
