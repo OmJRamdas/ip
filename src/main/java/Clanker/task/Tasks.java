@@ -2,6 +2,7 @@ package Clanker.task;
 
 import java.util.ArrayList;
 import Clanker.exceptions.*;
+import java.util.List;
 
 
 public class Tasks {
@@ -138,7 +139,35 @@ public class Tasks {
         }
     }
 
+    /**
+     *  Get all tasks
+     * @return tasks
+     */
     public ArrayList<Task> getTasksList() {
         return tasks;
     }
+
+    /**
+     * Find tasks containing a keyword and print their task numbers.
+     * @param keyword the search keyword
+     */
+    public void findTasks(String keyword) {
+        List<Integer> foundIndices = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().toLowerCase().contains(keyword.toLowerCase())) {
+                foundIndices.add(i + 1);
+            }
+        }
+
+        if (foundIndices.isEmpty()) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("ROGER ROGER! Here are the matching tasks:");
+            for (int index : foundIndices) {
+                System.out.println(index + ". " + tasks.get(index - 1).toString());
+            }
+        }
+    }
+
 }

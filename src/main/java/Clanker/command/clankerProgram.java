@@ -77,6 +77,9 @@ public class clankerProgram {
             case "delete":
                 tasks.deleteTask(Integer.parseInt(remainingWords));
                 break;
+            case "find":
+                tasks.findTasks(remainingWords);
+                break;
             default:
                 throw new InvalidCommandException(inputParser.getUserInput());
         }
