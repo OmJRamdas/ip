@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class filemanager {
     private final String filePath;
 
+    /**
+     * Filemanager Constructor
+     * @param filePath filepath
+     */
     public filemanager(String filePath) {
         this.filePath = filePath;
         ensureFileExists();
