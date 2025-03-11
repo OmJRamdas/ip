@@ -6,44 +6,49 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class filemanager {
+public class fileManager {
     private final String filePath;
 
+    private static final String DIRECTORY_CREATION_SUCCESS = "Directory created: ";
+    private static final String DIRECTORY_CREATION_FAILURE = "Failed to create directory!";
+    private static final String FILE_CREATION_SUCCESS = "File created: ";
+    private static final String FILE_CREATION_FAILURE = "Failed to create file!";
+    private static final String FILE_ERROR = "An error occurred while ensuring file existence.";
+    private static final char TASK_TODO = 'T';
+    private static final char TASK_DEADLINE = 'D';
+    private static final char TASK_EVENT = 'E';
+    private static final char TASK_DONE = 'X';
+    private static final int TASK_TYPE_INDEX = 1;
+    private static final int TASK_DONE_INDEX = 4;
+    private static final int TASK_DETAILS_START_INDEX = 7;
+
     /**
-     * Filemanager Constructor
+     * FileManager Constructor
      * @param filePath filepath
      */
-    public filemanager(String filePath) {
+    public fileManager(String filePath) {
         this.filePath = filePath;
         ensureFileExists();
     }
 
-    /**
-     * Ensure that the data directory and task file exist.
-     */
     private void ensureFileExists() {
         File file = new File(filePath);
         File directory = file.getParentFile();
 
         try {
-            if (!directory.exists()) {
-                if (directory.mkdirs()) {
-                    System.out.println("Directory created: " + directory.getAbsolutePath());
-                } else {
-                    System.out.println("Failed to create directory!");
-                }
+            if (!directory.exists() && !directory.mkdirs()) {
+                System.out.println(DIRECTORY_CREATION_FAILURE);
+                return;
             }
+            System.out.println(DIRECTORY_CREATION_SUCCESS + directory.getAbsolutePath());
 
-            if (!file.exists()) {
-                if (file.createNewFile()) {
-                    System.out.println("File created: " + file.getAbsolutePath());
-                } else {
-                    System.out.println("Failed to create file!");
-                }
+            if (!file.exists() && !file.createNewFile()) {
+                System.out.println(FILE_CREATION_FAILURE);
+                return;
             }
+            System.out.println(FILE_CREATION_SUCCESS + file.getAbsolutePath());
         } catch (IOException e) {
-            System.out.println("An error occurred while ensuring file existence.");
-            e.printStackTrace();
+            System.out.println(FILE_ERROR);
         }
     }
 
@@ -73,7 +78,7 @@ public class filemanager {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            return tasks; // If the file doesn't exist, return an empty list
+            return tasks;
         }
 
         try (Scanner scanner = new Scanner(file)) {
@@ -96,38 +101,32 @@ public class filemanager {
      * @return A Task object.
      */
     private Task parseTaskFromFile(String line) {
-
-        char type = line.charAt(1); // T, D, E
-        boolean isDone = line.charAt(4) == 'X'; // 'X' means done
-
-        String details = line.substring(7).trim(); // Skip "[T][ ] " or "[D][X] "
+        char type = line.charAt(TASK_TYPE_INDEX);
+        boolean isDone = line.charAt(TASK_DONE_INDEX) == TASK_DONE;
+        String details = line.substring(TASK_DETAILS_START_INDEX).trim();
 
         switch (type) {
-        case 'T': {
+        case TASK_TODO:
             Todo todo = new Todo(details);
             if (isDone) todo.markAsDone();
             return todo;
-        }
-        case 'D': {
-            String[] parts = details.split(" \\(by: ", 2);
-            String description = parts[0].trim();
-            String by = parts[1].substring(0, parts[1].length() - 1); // remove closing ')'
-            Deadline deadline = new Deadline(description, by);
+        case TASK_DEADLINE:
+            String[] deadlineParts = details.split(" \\(by: ", 2);
+            String deadlineDesc = deadlineParts[0].trim();
+            String by = deadlineParts[1].substring(0, deadlineParts[1].length() - 1);
+            Deadline deadline = new Deadline(deadlineDesc, by);
             if (isDone) deadline.markAsDone();
             return deadline;
-        }
-        case 'E': {
-            String[] parts = details.split(" \\(from: | to: ", 3);
-            String description = parts[0].trim();
-            String from = parts[1].trim();
-            String to = parts[2].substring(0, parts[2].length() - 1); // remove closing ')'
-            Event event = new Event(description, from, to);
+        case TASK_EVENT:
+            String[] eventParts = details.split(" \\(from: | to: ", 3);
+            String eventDesc = eventParts[0].trim();
+            String from = eventParts[1].trim();
+            String to = eventParts[2].substring(0, eventParts[2].length() - 1);
+            Event event = new Event(eventDesc, from, to);
             if (isDone) event.markAsDone();
             return event;
-        }
         default:
             throw new IllegalArgumentException("Invalid task type in file: " + type);
         }
     }
-
 }

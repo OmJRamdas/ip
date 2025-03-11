@@ -2,19 +2,28 @@ package Clanker.command;
 
 import java.io.*;
 import Clanker.parser.userInputParser;
-import Clanker.storage.filemanager;
+import Clanker.storage.fileManager;
 import Clanker.task.*;
 import Clanker.exceptions.*;
 import Clanker.Ui.Ui;
 
 
 public class clankerProgram {
+    private static final String EXIT = "blast-em";
+    private static final String MARK = "mark";
+    private static final String UNMARK = "unmark";
+    private static final String LIST = "ls";
+    private static final String DELETE = "delete";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
 
     /**
      *  Main program
      */
     public static void run() {
-        filemanager manager = new filemanager("data/clanker.txt");
+        fileManager manager = new fileManager("data/clanker.txt");
         Tasks tasks;
         userInputParser inputParser = new userInputParser();
 
@@ -54,34 +63,34 @@ public class clankerProgram {
         String[] parts = inputParser.getParsedInput();
 
         switch (inputParser.getCommand()) {
-            case "blast-em":
-                break;
-            case "mark":
-                tasks.markTask(Integer.parseInt(parts[1]));
-                break;
-            case "unmark":
-                tasks.unmarkTask(Integer.parseInt(parts[1]));
-                break;
-            case "ls":
-                tasks.getTasks();
-                break;
-            case "todo":
-                tasks.addTodo(remainingWords);
-                break;
-            case "deadline":
-                tasks.addDeadline(remainingWords);
-                break;
-            case "event":
-                tasks.addEvent(remainingWords);
-                break;
-            case "delete":
-                tasks.deleteTask(Integer.parseInt(remainingWords));
-                break;
-            case "find":
-                tasks.findTasks(remainingWords);
-                break;
-            default:
-                throw new InvalidCommandException(inputParser.getUserInput());
+        case EXIT:
+            break;
+        case MARK:
+            tasks.markTask(Integer.parseInt(parts[1]));
+            break;
+        case UNMARK:
+            tasks.unmarkTask(Integer.parseInt(parts[1]));
+            break;
+        case LIST:
+            tasks.getTasks();
+            break;
+        case TODO:
+            tasks.addTodo(remainingWords);
+            break;
+        case DEADLINE:
+            tasks.addDeadline(remainingWords);
+            break;
+        case EVENT:
+            tasks.addEvent(remainingWords);
+            break;
+        case DELETE:
+            tasks.deleteTask(Integer.parseInt(remainingWords));
+            break;
+        case FIND:
+            tasks.findTasks(remainingWords);
+            break;
+        default:
+            throw new InvalidCommandException(inputParser.getUserInput());
         }
     }
 }

@@ -123,7 +123,7 @@ public class Tasks {
         if (tasks.isEmpty()) {
             System.out.println("No tasks to delete");
             return;
-        } else if (number > tasks.size()) {
+        } else if (number > tasks.size() || number <= 0) {
             System.out.println("Task number out of bounds");
             return;
         }
