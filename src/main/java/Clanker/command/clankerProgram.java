@@ -7,8 +7,8 @@ import Clanker.task.*;
 import Clanker.exceptions.*;
 import Clanker.Ui.Ui;
 
-
 public class clankerProgram {
+    private static final String HELP = "help";
     private static final String EXIT = "blast-em";
     private static final String MARK = "mark";
     private static final String UNMARK = "unmark";
@@ -63,6 +63,9 @@ public class clankerProgram {
         String[] parts = inputParser.getParsedInput();
 
         switch (inputParser.getCommand()) {
+        case HELP:
+            Ui.help();
+            break;
         case EXIT:
             break;
         case MARK:

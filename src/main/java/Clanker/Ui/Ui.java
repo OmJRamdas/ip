@@ -9,6 +9,20 @@ public class Ui {
             + "| \\__/\\ | (_| | | | |   <  __/ |\n"
             + " \\____/_|\\__,_|_| |_|_|\\_\\___|_|\n";
 
+
+    private static final String HELP = """
+            help        list all commands and functions
+            ls          list all tasks
+            todo        add todo
+            deadline    add deadline
+            event       add event  
+            mark        mark task as done
+            unmark      mark task as undone 
+            delete      delete task
+            find        find task(s)
+            exit        exit program   
+            """;
+
     /**
      *  Greeting Function for Clanker
      */
@@ -24,6 +38,13 @@ public class Ui {
     public static void goodbye() {
         System.out.println("ROGER ROGER! Hope to see you soon");
         System.out.println(LINE);
+    }
+
+    /**
+     *  Print help to descibe functions in program
+     */
+    public static void help() {
+        System.out.println(HELP);
     }
 
     public static void printLine() {
