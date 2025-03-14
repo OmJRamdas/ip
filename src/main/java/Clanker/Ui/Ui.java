@@ -9,18 +9,17 @@ public class Ui {
             + "| \\__/\\ | (_| | | | |   <  __/ |\n"
             + " \\____/_|\\__,_|_| |_|_|\\_\\___|_|\n";
 
-
     private static final String HELP = """
             help        list all commands and functions
             ls          list all tasks
             todo        add todo
             deadline    add deadline
-            event       add event  
+            event       add event
             mark        mark task as done
-            unmark      mark task as undone 
+            unmark      mark task as undone
             delete      delete task
             find        find task(s)
-            exit        exit program   
+            blast-em    exit program
             """;
 
     /**
