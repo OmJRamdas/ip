@@ -1,6 +1,5 @@
 package Clanker.command;
 
-import Clanker.command.clankerProgram;
 import Clanker.Ui.Ui;
 
 public class Clanker {

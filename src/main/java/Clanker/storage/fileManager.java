@@ -2,7 +2,10 @@ package Clanker.storage;
 
 import Clanker.task.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +34,9 @@ public class fileManager {
         ensureFileExists();
     }
 
+    /**
+     *  Checks to see if file exists otherwise creates one
+     */
     private void ensureFileExists() {
         File file = new File(filePath);
         File directory = file.getParentFile();

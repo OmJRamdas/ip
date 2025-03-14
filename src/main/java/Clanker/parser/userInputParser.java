@@ -1,6 +1,5 @@
 package Clanker.parser;
 
-
 import java.util.Arrays;
 import java.util.Scanner;
 

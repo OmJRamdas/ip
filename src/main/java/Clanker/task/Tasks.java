@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import Clanker.exceptions.*;
 import java.util.List;
 
-
 public class Tasks {
     private ArrayList<Task> tasks;
 
@@ -43,8 +42,8 @@ public class Tasks {
     }
 
     /**
-     * Add todo to Tasks
-     * @param task, Todo
+     * Add to-do to Tasks
+     * @param task, To-do to be added
      */
     public void addTodo(String task) {
         if (task.isBlank()) { // Check if the description is empty
@@ -62,7 +61,7 @@ public class Tasks {
 
     /**
      * Add deadline to Tasks
-     * @param task, Deadline
+     * @param task, Deadline to be added
      */
     public void addDeadline(String task) {
         if (task.isBlank()) { // Check if the description is empty
@@ -83,7 +82,7 @@ public class Tasks {
 
     /**
      * Add Event to tasks
-     * @param task
+     * @param task Event to be added
      */
     public void addEvent(String task) {
         if (task.isBlank()) { // Check if the description is empty
@@ -169,5 +168,4 @@ public class Tasks {
             }
         }
     }
-
 }
